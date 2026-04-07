@@ -24,13 +24,13 @@ const CustomerLogin = () => {
     <div className="flex flex-col items-center justify-center min-h-[80vh]">
       <h1 className="text-3xl font-bold text-blue-600 mb-8">Dishy</h1>
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm">
-        <h2 className="text-xl font-semibold mb-6 text-center">{isRegister ? '新用户注册' : '欢迎回来'}</h2>
+        <h2 className="text-xl font-semibold mb-6 text-center">{isRegister ? 'Create your account' : 'Welcome back'}</h2>
         
         {error && <div className="bg-red-50 text-red-500 p-3 rounded mb-4 text-sm">{error}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">邮箱地址</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input 
               type="email" 
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
@@ -40,7 +40,7 @@ const CustomerLogin = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">密码</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <input 
               type="password" 
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
@@ -54,7 +54,7 @@ const CustomerLogin = () => {
             disabled={loading}
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
           >
-            {loading ? '处理中...' : (isRegister ? '注册' : '登录')}
+            {loading ? 'Working...' : (isRegister ? 'Sign up' : 'Sign in')}
           </button>
         </form>
 
@@ -63,13 +63,13 @@ const CustomerLogin = () => {
             onClick={() => setIsRegister(!isRegister)} 
             className="text-blue-600 hover:underline"
           >
-            {isRegister ? '已有账号？去登录' : '没有账号？去注册'}
+            {isRegister ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>
           <button 
             onClick={handleGuest} 
             className="text-gray-500 hover:underline"
           >
-            以游客身份进入
+            Continue as guest
           </button>
         </div>
       </div>

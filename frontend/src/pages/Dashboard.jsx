@@ -19,21 +19,21 @@ const Dashboard = () => {
   const mobileTabs = [
     {
       id: 'pending',
-      label: '待接单',
+      label: 'Pending',
       count: pendingOrders.length,
       activeClassName: 'bg-orange-600 text-white shadow-lg',
       badgeClassName: 'bg-orange-500 text-white'
     },
     {
       id: 'processing',
-      label: '制作中',
+      label: 'In progress',
       count: processingOrders.length,
       activeClassName: 'bg-blue-600 text-white shadow-lg',
       badgeClassName: 'bg-blue-500 text-white'
     },
     {
       id: 'done',
-      label: '已完成',
+      label: 'Done',
       count: doneOrders.length,
       activeClassName: 'bg-green-600 text-white shadow-lg',
       badgeClassName: 'bg-green-500 text-white'
@@ -60,7 +60,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="text-right">
-          <p className="text-[10px] text-gray-300 font-black uppercase tracking-tighter">订单编号</p>
+          <p className="text-[10px] text-gray-300 font-black uppercase tracking-tighter">Order ID</p>
           <p className="text-xs font-mono font-bold text-gray-400 group-hover:text-blue-600 transition-colors">{order.order_id}</p>
         </div>
       </div>
@@ -96,12 +96,12 @@ const Dashboard = () => {
 
       <div className="flex justify-between items-center pt-2">
         <div>
-          <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">实付总计</p>
-          <p className="text-2xl font-black text-orange-600">￥{order.final_price}</p>
+          <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Paid</p>
+          <p className="text-2xl font-black text-orange-600">${order.final_price}</p>
         </div>
         <div className="flex items-center space-x-2">
           <span className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${
-            order.pickup_or_delivery === '配送' ? 'bg-purple-100 text-purple-600' : 'bg-gray-100 text-gray-600'
+            order.pickup_or_delivery === 'Delivery' ? 'bg-purple-100 text-purple-600' : 'bg-gray-100 text-gray-600'
           }`}>
             {order.pickup_or_delivery}
           </span>
@@ -115,7 +115,7 @@ const Dashboard = () => {
             className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black shadow-xl hover:bg-blue-700 active:scale-[0.98] transition-all flex items-center justify-center space-x-2"
           >
             <Package size={20} />
-            <span>一键接单</span>
+            <span>Accept</span>
           </button>
         )}
         {order.status === 'processing' && (
@@ -124,13 +124,13 @@ const Dashboard = () => {
             className="w-full bg-green-600 text-white py-4 rounded-2xl font-black shadow-xl hover:bg-green-700 active:scale-[0.98] transition-all flex items-center justify-center space-x-2"
           >
             <CheckCircle size={20} />
-            <span>制作完成</span>
+            <span>Mark done</span>
           </button>
         )}
         {order.status === 'done' && (
           <div className="w-full bg-gray-100 text-gray-400 py-4 rounded-2xl font-black flex items-center justify-center space-x-2 border-2 border-dashed border-gray-200">
             <CheckCircle size={20} />
-            <span>已入库</span>
+            <span>Completed</span>
           </div>
         )}
       </div>
@@ -142,12 +142,12 @@ const Dashboard = () => {
       <header className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 bg-white p-8 rounded-[40px] shadow-sm border border-gray-100 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 rounded-full -mr-16 -mt-16"></div>
         <div>
-          <h2 className="text-3xl font-black text-gray-800">订单工作台</h2>
+          <h2 className="text-3xl font-black text-gray-800">Order dashboard</h2>
           <p className="text-sm text-gray-400 mt-1 uppercase tracking-[0.3em] font-bold">Real-time Order Management</p>
         </div>
         <div className="flex items-center bg-gray-50 p-2 rounded-2xl space-x-2">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <span className="text-xs font-black text-gray-500 uppercase tracking-widest">在线接单中</span>
+          <span className="text-xs font-black text-gray-500 uppercase tracking-widest">Online</span>
         </div>
       </header>
 
@@ -182,13 +182,13 @@ const Dashboard = () => {
           <div className="flex items-center justify-between px-4">
             <h3 className="text-sm font-black text-orange-600 uppercase tracking-[0.2em] flex items-center">
               <Clock size={16} className="mr-2" />
-              待接单
+              Pending
             </h3>
             <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-[10px] font-black">{pendingOrders.length}</span>
           </div>
           <div className="space-y-6 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
             {pendingOrders.map(order => <OrderCard key={order.order_id} order={order} />)}
-            {pendingOrders.length === 0 && <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">暂无待接单</div>}
+            {pendingOrders.length === 0 && <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">No pending orders</div>}
           </div>
         </div>
 
@@ -197,13 +197,13 @@ const Dashboard = () => {
           <div className="flex items-center justify-between px-4">
             <h3 className="text-sm font-black text-blue-600 uppercase tracking-[0.2em] flex items-center">
               <ShoppingBag size={16} className="mr-2" />
-              制作中
+              In progress
             </h3>
             <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-[10px] font-black">{processingOrders.length}</span>
           </div>
           <div className="space-y-6 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
             {processingOrders.map(order => <OrderCard key={order.order_id} order={order} />)}
-            {processingOrders.length === 0 && <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">暂无制作中</div>}
+            {processingOrders.length === 0 && <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">No in-progress orders</div>}
           </div>
         </div>
 
@@ -212,13 +212,13 @@ const Dashboard = () => {
           <div className="flex items-center justify-between px-4">
             <h3 className="text-sm font-black text-green-600 uppercase tracking-[0.2em] flex items-center">
               <CheckCircle size={16} className="mr-2" />
-              已完成
+              Done
             </h3>
             <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-[10px] font-black">{doneOrders.length}</span>
           </div>
           <div className="space-y-6 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
             {doneOrders.map(order => <OrderCard key={order.order_id} order={order} />)}
-            {doneOrders.length === 0 && <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">暂无已完成</div>}
+            {doneOrders.length === 0 && <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">No completed orders</div>}
           </div>
         </div>
       </div>
@@ -232,7 +232,7 @@ const Dashboard = () => {
         {((activeTab === 'pending' && pendingOrders.length === 0) || 
           (activeTab === 'processing' && processingOrders.length === 0) || 
           (activeTab === 'done' && doneOrders.length === 0)) && (
-          <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">暂无记录</div>
+          <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">No records</div>
         )}
       </div>
     </div>

@@ -50,15 +50,15 @@ const OrderDetail = () => {
 
   const getStatusText = (status) => {
     switch (status) {
-      case 'pending': return '待接单';
-      case 'processing': return '制作中';
-      case 'done': return '已完成';
+      case 'pending': return 'Pending';
+      case 'processing': return 'In progress';
+      case 'done': return 'Done';
       default: return status;
     }
   };
 
-  if (loading) return <div className="text-center p-10 text-gray-400">正在加载订单详情...</div>;
-  if (!order) return <div className="text-center p-10 text-red-500">订单未找到</div>;
+  if (loading) return <div className="text-center p-10 text-gray-400">Loading order...</div>;
+  if (!order) return <div className="text-center p-10 text-red-500">Order not found</div>;
 
   return (
     <div className="space-y-6 pb-24 sm:pb-8">
@@ -66,7 +66,7 @@ const OrderDetail = () => {
         <Link to="/customer/orders" className="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <ChevronLeft size={24} className="text-gray-600" />
         </Link>
-        <h2 className="text-xl font-bold text-gray-800 text-center flex-1 pr-10">订单详情</h2>
+        <h2 className="text-xl font-bold text-gray-800 text-center flex-1 pr-10">Order details</h2>
       </header>
 
       <section className={`p-6 rounded-3xl border text-center space-y-2 shadow-sm ${getStatusStyle(order.status)}`}>
@@ -77,28 +77,28 @@ const OrderDetail = () => {
         </div>
         <h3 className="text-2xl font-black uppercase tracking-widest">{getStatusText(order.status)}</h3>
         <p className="text-sm opacity-70">
-          {order.status === 'pending' && '商家正在处理您的订单，请稍候'}
-          {order.status === 'processing' && '厨师正在为您精心烹饪美食'}
-          {order.status === 'done' && '您的餐食已准备完毕，请及时取用'}
+          {order.status === 'pending' && 'Your order is waiting for the restaurant to accept it.'}
+          {order.status === 'processing' && 'Your food is being prepared.'}
+          {order.status === 'done' && 'Your order is ready.'}
         </p>
       </section>
 
       <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 space-y-4">
         <div className="flex items-center space-x-2 text-blue-600 font-bold mb-4">
           <Truck size={20} />
-          <span>配送信息</span>
+          <span>Delivery info</span>
         </div>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">联系人</p>
+            <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">Name</p>
             <p className="text-gray-800 font-bold">{order.userName}</p>
           </div>
           <div>
-            <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">联系电话</p>
+            <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">Phone</p>
             <p className="text-gray-800 font-bold">{order.phone}</p>
           </div>
           <div className="col-span-2">
-            <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">方式</p>
+            <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">Method</p>
             <p className="text-gray-800 font-bold flex items-center">
               <MapPin size={14} className="mr-1 text-blue-600" />
               {order.pickupOrDelivery}
@@ -106,7 +106,7 @@ const OrderDetail = () => {
           </div>
           {order.remark && (
             <div className="col-span-2 pt-2 border-t border-gray-50">
-              <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">备注</p>
+              <p className="text-xs text-gray-400 font-semibold mb-1 uppercase">Note</p>
               <p className="text-gray-600 italic">“{order.remark}”</p>
             </div>
           )}
@@ -116,7 +116,7 @@ const OrderDetail = () => {
       <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 space-y-4">
         <div className="flex items-center space-x-2 text-blue-600 font-bold mb-4">
           <ShoppingBag size={20} />
-          <span>菜品明细</span>
+          <span>Items</span>
         </div>
         <div className="space-y-4">
           {order.items.map((item, index) => (
@@ -136,7 +136,7 @@ const OrderDetail = () => {
                   ))}
                 </div>
               </div>
-              <span className="font-bold text-gray-800 ml-4">￥{item.totalPrice}</span>
+              <span className="font-bold text-gray-800 ml-4">${item.totalPrice}</span>
             </div>
           ))}
         </div>
@@ -145,20 +145,20 @@ const OrderDetail = () => {
       <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 space-y-4">
         <div className="flex items-center space-x-2 text-blue-600 font-bold mb-4">
           <CreditCard size={20} />
-          <span>结算汇总</span>
+          <span>Summary</span>
         </div>
         <div className="space-y-2 text-sm text-gray-500">
           <div className="flex justify-between">
-            <span>商品总价</span>
-            <span>￥{order.total}</span>
+            <span>Subtotal</span>
+            <span>${order.total}</span>
           </div>
           <div className="flex justify-between text-orange-500 font-semibold">
-            <span>积分抵扣</span>
-            <span>-￥{order.coinsUsed}</span>
+            <span>Coins</span>
+            <span>-${order.coinsUsed}</span>
           </div>
           <div className="flex justify-between items-center pt-4 border-t border-gray-50">
-            <span className="text-lg font-bold text-gray-800">实付总计</span>
-            <span className="text-2xl font-black text-orange-600">￥{order.finalPrice}</span>
+            <span className="text-lg font-bold text-gray-800">Total</span>
+            <span className="text-2xl font-black text-orange-600">${order.finalPrice}</span>
           </div>
         </div>
       </section>
@@ -166,11 +166,11 @@ const OrderDetail = () => {
       <div className="flex space-x-4 pt-4">
         <button className="flex-1 bg-white border border-gray-200 text-gray-600 py-4 rounded-2xl font-bold shadow-sm flex items-center justify-center space-x-2">
           <Phone size={18} />
-          <span>联系商家</span>
+          <span>Contact</span>
         </button>
         <button className="flex-1 bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-xl flex items-center justify-center space-x-2">
           <MessageSquare size={18} />
-          <span>售后服务</span>
+          <span>Support</span>
         </button>
       </div>
     </div>

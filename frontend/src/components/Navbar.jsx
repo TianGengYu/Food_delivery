@@ -20,25 +20,25 @@ const Navbar = ({ isRestaurant = false }) => {
       <div className="max-w-md mx-auto px-4 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] flex justify-around items-center sm:max-w-4xl sm:py-2">
         {isRestaurant ? (
           <>
-            <div className="text-xl font-bold text-blue-600 hidden sm:block">Dishy 商家版</div>
+            <div className="text-xl font-bold text-blue-600 hidden sm:block">Dishy Merchant</div>
             <Link to="/restaurant/dashboard" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
               <ClipboardList size={24} />
-              <span className="text-xs mt-1">订单看板</span>
+              <span className="text-xs mt-1">Dashboard</span>
             </Link>
             <button onClick={handleLogout} className="flex flex-col items-center text-gray-600 hover:text-red-600">
               <LogOut size={24} />
-              <span className="text-xs mt-1">退出登录</span>
+              <span className="text-xs mt-1">Sign out</span>
             </button>
           </>
         ) : (
           <>
             <Link to="/customer/home" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
               <Home size={24} />
-              <span className="text-xs mt-1">首页</span>
+              <span className="text-xs mt-1">Home</span>
             </Link>
             <Link to="/customer/menu" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
               <ClipboardList size={24} />
-              <span className="text-xs mt-1">菜单</span>
+              <span className="text-xs mt-1">Menu</span>
             </Link>
             <Link to="/customer/cart" className="flex flex-col items-center text-gray-600 hover:text-blue-600 relative">
               <ShoppingCart size={24} />
@@ -47,15 +47,15 @@ const Navbar = ({ isRestaurant = false }) => {
                   {items.length}
                 </span>
               )}
-              <span className="text-xs mt-1">购物车</span>
+              <span className="text-xs mt-1">Cart</span>
             </Link>
             <Link to="/customer/orders" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
               <ClipboardList size={24} />
-              <span className="text-xs mt-1">订单</span>
+              <span className="text-xs mt-1">Orders</span>
             </Link>
             <Link to="/customer/profile" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
               <User size={24} />
-              <span className="text-xs mt-1">我的</span>
+              <span className="text-xs mt-1">Me</span>
             </Link>
           </>
         )}

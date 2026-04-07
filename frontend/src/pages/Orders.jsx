@@ -21,14 +21,14 @@ const Orders = () => {
 
   const getStatusText = (status) => {
     switch (status) {
-      case 'pending': return '待接单';
-      case 'processing': return '制作中';
-      case 'done': return '已完成';
+      case 'pending': return 'Pending';
+      case 'processing': return 'In progress';
+      case 'done': return 'Done';
       default: return status;
     }
   };
 
-  if (loading && orders.length === 0) return <div className="text-center p-10 text-gray-400">正在加载订单...</div>;
+  if (loading && orders.length === 0) return <div className="text-center p-10 text-gray-400">Loading orders...</div>;
 
   if (orders.length === 0) {
     return (
@@ -36,13 +36,13 @@ const Orders = () => {
         <div className="bg-blue-50 p-6 rounded-full mb-6">
           <ShoppingBag size={64} className="text-blue-300" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">暂无订单</h2>
-        <p className="text-gray-500 mb-8 max-w-xs">您还没有下过单呢。快去选购一些美食吧！</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">No orders yet</h2>
+        <p className="text-gray-500 mb-8 max-w-xs">You haven't placed any orders. Browse the menu and get started.</p>
         <Link 
           to="/customer/menu" 
           className="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all"
         >
-          开始点餐
+          Start ordering
         </Link>
       </div>
     );
@@ -51,7 +51,7 @@ const Orders = () => {
   return (
     <div className="space-y-6 pb-24 sm:pb-8">
       <header className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-800">我的订单</h2>
+        <h2 className="text-2xl font-bold text-gray-800">My orders</h2>
         <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-semibold">Order History</p>
       </header>
 
@@ -64,7 +64,7 @@ const Orders = () => {
           >
             <div className="flex justify-between items-start mb-4">
               <div>
-                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">订单编号</p>
+                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Order ID</p>
                 <p className="text-sm font-mono font-bold text-gray-800">{order.order_id}</p>
               </div>
               <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusStyle(order.status)}`}>
@@ -91,8 +91,8 @@ const Orders = () => {
                 )}
               </div>
               <div className="text-right">
-                <p className="text-xs text-gray-400">实付金额</p>
-                <p className="text-xl font-black text-orange-600">￥{order.final_price}</p>
+                <p className="text-xs text-gray-400">Paid</p>
+                <p className="text-xl font-black text-orange-600">${order.final_price}</p>
               </div>
             </div>
           </Link>

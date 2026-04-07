@@ -6,19 +6,19 @@ const Home = () => {
   const { user } = useAuthStore();
 
   const restaurants = [
-    { id: 1, name: '第一食堂', rating: 4.8, distance: '200m', tag: '中式盖饭', img: 'https://placehold.co/400x200?text=Dining+Hall+1' },
-    { id: 2, name: '清真风味', rating: 4.6, distance: '500m', tag: '兰州拉面', img: 'https://placehold.co/400x200?text=Halal+Flavor' },
-    { id: 3, name: '港式茶餐厅', rating: 4.5, distance: '800m', tag: '下午茶/正餐', img: 'https://placehold.co/400x200?text=HK+Diner' }
+    { id: 1, name: 'Campus Dining Hall #1', rating: 4.8, distance: '200m', tag: 'Rice bowls', img: 'https://placehold.co/400x200?text=Dining+Hall+1' },
+    { id: 2, name: 'Halal Flavor', rating: 4.6, distance: '500m', tag: 'Lanzhou noodles', img: 'https://placehold.co/400x200?text=Halal+Flavor' },
+    { id: 3, name: 'HK-Style Diner', rating: 4.5, distance: '800m', tag: 'Tea & meals', img: 'https://placehold.co/400x200?text=HK+Diner' }
   ];
 
   return (
     <div className="space-y-6">
       <header className="flex justify-between items-center py-4 bg-white px-4 rounded-xl shadow-sm border border-gray-100">
         <div>
-          <h2 className="text-xl font-bold text-gray-800">你好, {user?.isGuest ? '游客' : user?.email.split('@')[0]}</h2>
+          <h2 className="text-xl font-bold text-gray-800">Hi, {user?.isGuest ? 'Guest' : user?.email.split('@')[0]}</h2>
           <p className="text-sm text-gray-500 flex items-center mt-1">
             <span className="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-semibold">
-              {user?.coins || 0} 积分
+              {user?.coins || 0} coins
             </span>
           </p>
         </div>
@@ -28,7 +28,7 @@ const Home = () => {
       </header>
 
       <section>
-        <h3 className="text-lg font-bold text-gray-800 mb-4 px-1">推荐商家</h3>
+        <h3 className="text-lg font-bold text-gray-800 mb-4 px-1">Restaurants</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {restaurants.map((res) => (
             <Link 

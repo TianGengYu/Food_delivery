@@ -11,13 +11,13 @@ const Cart = () => {
         <div className="bg-blue-50 p-6 rounded-full mb-6">
           <ShoppingCart size={64} className="text-blue-300" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">您的购物车是空的</h2>
-        <p className="text-gray-500 mb-8 max-w-xs">看起来您还没有添加任何美味的餐食。快去菜单看看吧！</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Your cart is empty</h2>
+        <p className="text-gray-500 mb-8 max-w-xs">You haven't added anything yet. Head to the menu and pick something tasty.</p>
         <Link 
           to="/customer/menu" 
           className="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all"
         >
-          浏览菜单
+          Browse menu
         </Link>
       </div>
     );
@@ -29,7 +29,7 @@ const Cart = () => {
         <Link to="/customer/menu" className="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <ChevronLeft size={24} className="text-gray-600" />
         </Link>
-        <h2 className="text-xl font-bold text-gray-800">购物车</h2>
+        <h2 className="text-xl font-bold text-gray-800">Cart</h2>
         <button 
           onClick={clearCart}
           className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
@@ -64,7 +64,7 @@ const Cart = () => {
                 </button>
               </div>
               <div className="flex justify-between items-center mt-4">
-                <span className="font-bold text-orange-600">￥{item.totalPrice}</span>
+                <span className="font-bold text-orange-600">${item.totalPrice}</span>
                 <div className="flex items-center space-x-3 bg-gray-100 rounded-full p-0.5">
                   <button 
                     onClick={() => updateQuantity(index, -1)}
@@ -88,18 +88,18 @@ const Cart = () => {
 
       <div className="bg-white p-6 rounded-3xl shadow-lg border border-gray-100 space-y-4">
         <div className="flex justify-between items-center text-gray-500">
-          <span>商品金额</span>
-          <span>￥{totalAmount}</span>
+          <span>Items</span>
+          <span>${totalAmount}</span>
         </div>
         <div className="flex justify-between items-center pt-2 border-t border-gray-100">
-          <span className="text-lg font-bold text-gray-800">总计金额</span>
-          <span className="text-2xl font-black text-orange-600">￥{totalAmount}</span>
+          <span className="text-lg font-bold text-gray-800">Total</span>
+          <span className="text-2xl font-black text-orange-600">${totalAmount}</span>
         </div>
         <Link 
           to="/customer/checkout"
           className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-xl hover:bg-blue-700 active:scale-[0.98] transition-all flex items-center justify-center space-x-2"
         >
-          <span>去结算</span>
+          <span>Checkout</span>
           <ChevronRight size={20} />
         </Link>
       </div>

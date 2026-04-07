@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Plus, ShoppingCart, ChevronRight } from 'lucide-react';
+import { Plus, ShoppingCart } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import useCartStore from '../stores/useCartStore';
 import CustomizationModal from '../components/CustomizationModal';
 
 const Menu = () => {
   const [dishes, setDishes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('全部');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [activeDish, setActiveDish] = useState(null);
-  const { addItem, items, totalAmount } = useCartStore();
+  const { addItem } = useCartStore();
 
-  const categories = ['全部', '盖饭', '面', '粥', '汤', '小食', '饮品'];
+  const categories = ['All', 'Rice Bowls', 'Noodles', 'Congee', 'Soup', 'Snacks', 'Drinks'];
 
   useEffect(() => {
     const fetchDishes = async () => {
@@ -35,7 +35,7 @@ const Menu = () => {
     fetchDishes();
   }, []);
 
-  const filteredDishes = selectedCategory === '全部' 
+  const filteredDishes = selectedCategory === 'All' 
     ? dishes 
     : dishes.filter(d => d.category === selectedCategory);
 
@@ -79,9 +79,9 @@ const Menu = () => {
                 <h4 className="font-bold text-gray-800 text-lg group-hover:text-blue-600 transition-colors">
                   {dish.name}
                 </h4>
-                <p className="text-xs text-gray-400 mt-1">基础价格: ￥{dish.basePrice}</p>
+                <p className="text-xs text-gray-400 mt-1">Base price: ${dish.basePrice}</p>
                 <div className="flex justify-between items-center mt-2">
-                  <span className="text-lg font-bold text-orange-600">￥{dish.basePrice} <span className="text-xs text-gray-400 font-normal">起</span></span>
+                  <span className="text-lg font-bold text-orange-600">${dish.basePrice} <span className="text-xs text-gray-400 font-normal">from</span></span>
                   <button 
                     className="bg-blue-600 text-white p-1.5 rounded-full shadow-lg hover:bg-blue-700 active:scale-90 transition-all"
                   >
@@ -93,31 +93,6 @@ const Menu = () => {
           ))}
         </div>
       </main>
-
-      {/* Floating Cart Indicator */}
-      {items.length > 0 && (
-        <div className="fixed bottom-20 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 sm:w-80 bg-gray-900 text-white p-4 rounded-2xl flex items-center justify-between shadow-2xl z-40">
-          <div className="flex items-center space-x-4">
-            <div className="bg-blue-600 p-2 rounded-lg relative">
-              <ShoppingCart size={24} />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-gray-900">
-                {items.length}
-              </span>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">总计金额</p>
-              <p className="text-lg font-bold">￥{totalAmount}</p>
-            </div>
-          </div>
-          <button 
-            onClick={() => window.location.href='/customer/cart'}
-            className="bg-blue-600 px-6 py-2 rounded-xl font-bold hover:bg-blue-700 active:scale-95 transition-all flex items-center"
-          >
-            去结算
-            <ChevronRight size={18} className="ml-1" />
-          </button>
-        </div>
-      )}
 
       {/* Customization Modal */}
       {activeDish && (

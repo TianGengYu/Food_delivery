@@ -20,7 +20,7 @@ const RestaurantLogin = () => {
       <div className="bg-blue-600 p-4 rounded-3xl shadow-xl mb-10 text-white">
         <ClipboardList size={48} />
       </div>
-      <h1 className="text-3xl font-black text-gray-800 mb-2">商家管理中心</h1>
+      <h1 className="text-3xl font-black text-gray-800 mb-2">Merchant Center</h1>
       <p className="text-sm text-gray-400 mb-10 uppercase tracking-[0.2em] font-bold">Merchant Dashboard</p>
 
       <div className="bg-white p-8 rounded-[40px] shadow-2xl w-full max-w-sm border border-gray-100 relative">
@@ -36,7 +36,7 @@ const RestaurantLogin = () => {
             <input 
               type="email" 
               className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl transition-all outline-none text-gray-800 font-bold"
-              placeholder="商家邮箱"
+              placeholder="Merchant email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -47,7 +47,7 @@ const RestaurantLogin = () => {
             <input 
               type="password" 
               className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl transition-all outline-none text-gray-800 font-bold"
-              placeholder="登录密码"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -58,12 +58,12 @@ const RestaurantLogin = () => {
             disabled={loading}
             className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black shadow-xl hover:bg-blue-700 active:scale-[0.98] transition-all disabled:opacity-50"
           >
-            {loading ? '正在验证...' : '进入控制台'}
+            {loading ? 'Checking...' : 'Continue'}
           </button>
         </form>
 
         <div className="mt-8 text-center text-xs text-gray-300">
-          <p>请使用专属商家账号登录</p>
+          <p>Please sign in with your merchant account</p>
           <p className="mt-1 font-mono uppercase tracking-tighter">Restaurant @ Dishy</p>
         </div>
       </div>
