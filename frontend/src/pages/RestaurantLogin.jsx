@@ -66,6 +66,16 @@ const RestaurantLogin = () => {
           <p>Please sign in with your merchant account</p>
           <p className="mt-1 font-mono uppercase tracking-tighter">Restaurant @ Dishy</p>
         </div>
+
+        <div className="mt-6 pt-6 border-t border-gray-100">
+          <button
+            type="button"
+            onClick={() => navigate('/customer/login')}
+            className="w-full bg-white text-gray-700 py-3 rounded-2xl font-black border-2 border-gray-200 hover:bg-gray-50 active:scale-[0.99] transition-all"
+          >
+            用户登录
+          </button>
+        </div>
       </div>
     </div>
   );

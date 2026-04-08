@@ -30,7 +30,7 @@ const useAuthStore = create((set) => ({
       set({ user: userData, loading: false });
       return true;
     } catch (err) {
-      set({ error: err.message || 'Sign in failed', loading: false });
+      set({ error: err.message || '登录失败', loading: false });
       return false;
     }
   },
@@ -48,7 +48,7 @@ const useAuthStore = create((set) => ({
       set({ loading: false });
       return true;
     } catch (err) {
-      set({ error: err.message || 'Sign up failed', loading: false });
+      set({ error: err.message || '注册失败', loading: false });
       return false;
     }
   },
@@ -101,7 +101,7 @@ const useAuthStore = create((set) => ({
       } catch {
         set({
           error:
-            'Guest sign-in failed. Enable Anonymous sign-ins in Supabase Auth, or disable Email Confirmations.',
+            '游客登录失败：请在 Supabase 启用 Anonymous 登录，或在 Auth 设置里关闭 Email Confirmations',
           loading: false
         });
         return false;

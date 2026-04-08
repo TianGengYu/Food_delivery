@@ -72,6 +72,16 @@ const CustomerLogin = () => {
             Continue as guest
           </button>
         </div>
+
+        <div className="mt-6 pt-6 border-t border-gray-100">
+          <button
+            type="button"
+            onClick={() => navigate('/restaurant/login')}
+            className="w-full bg-white text-gray-700 py-2 rounded-lg font-semibold border border-gray-200 hover:bg-gray-50 transition"
+          >
+            商家登录
+          </button>
+        </div>
       </div>
     </div>
   );
