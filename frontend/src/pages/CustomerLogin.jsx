@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/useAuthStore';
 
 const CustomerLogin = () => {
+  const { user, login, register, guestLogin, loading, error } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/customer/home', { replace: true });
+    }
+  }, [user, navigate]);
+  
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, register, guestLogin, loading, error } = useAuthStore();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

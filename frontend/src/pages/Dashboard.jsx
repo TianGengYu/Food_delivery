@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ClipboardList, Clock, CheckCircle, Package, User, Phone, MessageSquare, ShoppingBag } from 'lucide-react';
+import { ClipboardList, Clock, CheckCircle, Package, User, Phone, MessageSquare, ShoppingBag, History } from 'lucide-react';
 import useOrderStore from '../stores/useOrderStore';
 
 const Dashboard = () => {
@@ -14,7 +14,6 @@ const Dashboard = () => {
 
   const pendingOrders = orders.filter(o => o.status === 'pending');
   const processingOrders = orders.filter(o => o.status === 'processing');
-  const doneOrders = orders.filter(o => o.status === 'done');
 
   const mobileTabs = [
     {
@@ -32,11 +31,11 @@ const Dashboard = () => {
       badgeClassName: 'bg-blue-500 text-white'
     },
     {
-      id: 'done',
-      label: 'Done',
-      count: doneOrders.length,
-      activeClassName: 'bg-green-600 text-white shadow-lg',
-      badgeClassName: 'bg-green-500 text-white'
+      id: 'history',
+      label: 'History',
+      count: 0,
+      activeClassName: 'bg-gray-600 text-white shadow-lg',
+      badgeClassName: 'bg-gray-500 text-white'
     }
   ];
 
@@ -208,55 +207,22 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Column 3: Done */}
+        {/* Column 3: History Link */}
         <div className="space-y-6">
           <div className="flex items-center justify-between px-4">
-            <h3 className="text-sm font-black text-green-600 uppercase tracking-[0.2em] flex items-center">
-              <CheckCircle size={16} className="mr-2" />
-              Done
+            <h3 className="text-sm font-black text-gray-600 uppercase tracking-[0.2em] flex items-center">
+              <History size={16} className="mr-2" />
+              History
             </h3>
-            <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-[10px] font-black">{doneOrders.length}</span>
           </div>
-          <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
-            {doneOrders.map(order => (
-              <div key={order.order_id} className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h4 className="font-bold text-gray-800 text-sm">{order.user_name}</h4>
-                    <p className="text-xs text-gray-400">{order.phone}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-[10px] text-gray-300 font-black uppercase tracking-tighter">Order ID</p>
-                    <p className="text-xs font-mono font-bold text-gray-400">{order.order_id}</p>
-                  </div>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <div className="text-xs text-gray-500">
-                    {order.items.length} item{order.items.length > 1 ? 's' : ''}
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xs text-gray-400">Paid</p>
-                    <p className="text-lg font-black text-green-600">${order.final_price}</p>
-                  </div>
-                </div>
-                
-                <div className="mt-3 pt-3 border-t border-gray-100">
-                  <div className="flex justify-between items-center">
-                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${
-                      order.pickup_or_delivery === 'Delivery' ? 'bg-purple-100 text-purple-600' : 'bg-gray-100 text-gray-600'
-                    }`}>
-                      {order.pickup_or_delivery}
-                    </span>
-                    <div className="w-full bg-gray-100 text-gray-400 py-2 px-3 rounded-xl font-bold flex items-center justify-center space-x-1 text-xs">
-                      <CheckCircle size={12} />
-                      <span>Completed</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-            {doneOrders.length === 0 && <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">No completed orders</div>}
+          <div className="text-center">
+            <a 
+              href="/restaurant/history"
+              className="inline-flex items-center justify-center bg-gray-100 text-gray-600 px-6 py-4 rounded-2xl font-bold hover:bg-gray-200 transition-all border-2 border-dashed border-gray-200"
+            >
+              <History size={16} className="mr-2" />
+              View Order History
+            </a>
           </div>
         </div>
       </div>
@@ -265,11 +231,20 @@ const Dashboard = () => {
       <div className="sm:hidden space-y-6">
         {activeTab === 'pending' && pendingOrders.map(order => <OrderCard key={order.order_id} order={order} />)}
         {activeTab === 'processing' && processingOrders.map(order => <OrderCard key={order.order_id} order={order} />)}
-        {activeTab === 'done' && doneOrders.map(order => <OrderCard key={order.order_id} order={order} />)}
+        {activeTab === 'history' && (
+          <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
+            <a 
+              href="/restaurant/history"
+              className="inline-flex items-center justify-center bg-white text-gray-600 px-6 py-4 rounded-2xl font-bold hover:bg-gray-100 transition-all border-2 border-gray-200"
+            >
+              <History size={16} className="mr-2" />
+              View Order History
+            </a>
+          </div>
+        )}
         
         {((activeTab === 'pending' && pendingOrders.length === 0) || 
-          (activeTab === 'processing' && processingOrders.length === 0) || 
-          (activeTab === 'done' && doneOrders.length === 0)) && (
+          (activeTab === 'processing' && processingOrders.length === 0)) && (
           <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 text-gray-300 text-xs font-bold uppercase tracking-widest">No records</div>
         )}
       </div>

@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/useAuthStore';
 import { ClipboardList, Lock, User } from 'lucide-react';
 
 const RestaurantLogin = () => {
+  const { user, login, loading, error } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user && user.role === 'restaurant') {
+      navigate('/restaurant/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, loading, error } = useAuthStore();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

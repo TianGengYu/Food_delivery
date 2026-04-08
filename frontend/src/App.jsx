@@ -14,6 +14,7 @@ import OrderDetail from './pages/OrderDetail';
 import Profile from './pages/Profile';
 import RestaurantLogin from './pages/RestaurantLogin';
 import Dashboard from './pages/Dashboard';
+import OrderHistory from './pages/OrderHistory';
 
 const ProtectedRoute = ({ children, allowedRole = 'customer' }) => {
   const { user } = useAuthStore();
@@ -52,6 +53,7 @@ function App() {
             {/* Restaurant Routes */}
             <Route path="/restaurant/login" element={<RestaurantLogin />} />
             <Route path="/restaurant/dashboard" element={<ProtectedRoute allowedRole="restaurant"><Dashboard /></ProtectedRoute>} />
+            <Route path="/restaurant/history" element={<ProtectedRoute allowedRole="restaurant"><OrderHistory /></ProtectedRoute>} />
 
             {/* Default Route */}
             <Route path="/" element={<Navigate to="/customer/login" replace />} />
